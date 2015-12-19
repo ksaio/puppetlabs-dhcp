@@ -35,8 +35,16 @@ class dhcp::params {
       $servicename      = 'dhcpd'
       $package_provider = undef
     }
+    'solaris': {
+      if ( $::operatingsystem == 'smartos' ) {
+        $dhcp_dir         = '/opt/local/etc/dhcp/'
+        $packagename      = 'isc-dhcpd'
+        $servicename      = 'isc-dhcpd'
+        $package_provider = undef
+      }
+    }
     default: {
-      fail('dhcp is supported on the following OS\'s: Debian, Ubuntu, Darwin, FreeBSD, RedHat, Fedora, and CentOS.')
+      fail('dhcp is supported on the following OS\'s: Debian, Ubuntu, Darwin, FreeBSD, RedHat, Fedora, CentOS, and SmartOS.')
     }
   }
 }
